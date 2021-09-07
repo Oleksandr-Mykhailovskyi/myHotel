@@ -13,7 +13,7 @@ public class UserInformation {
     protected int userAge;
     protected int userNumber;
 
-    protected String getNumber() {
+    protected void getNumber() {
 
         try {
             Scanner scanner = new Scanner(System.in);
@@ -22,10 +22,9 @@ public class UserInformation {
         } catch (InputMismatchException in) {
             getNumber();
         }
-        return String.valueOf(userNumber);
     }
 
-    protected Integer roomChoice(List<Room> saveRooms, Room room) {
+    protected void roomChoice(List<Room> saveRooms, Room room) {
         try {
             room.showUnRent(saveRooms);
             System.out.println("Wybierz pokój :");
@@ -38,10 +37,9 @@ public class UserInformation {
         } catch (InputMismatchException in) {
             roomChoice(saveRooms, room);
         }
-        return numberRoom;
     }
 
-    protected String checkName() {
+    protected void checkName() {
 
         System.out.println("Podaj imie :");
         Scanner name = new Scanner(System.in);
@@ -49,10 +47,9 @@ public class UserInformation {
 
         if (userName.length() <= 2 || !userName.matches("[a-zA-Z]+") || userName.length() > 15)
             checkName();
-        return userName;
     }
 
-    protected String checkSurname() {
+    protected void checkSurname() {
 
         System.out.println("Podaj nazwisko :");
         Scanner surname = new Scanner(System.in);
@@ -60,21 +57,18 @@ public class UserInformation {
 
         if (userSurname.length() <= 2 || !userSurname.matches("[a-zA-Z]+") || userSurname.length() > 15)
             checkSurname();
-        return userSurname;
     }
 
-    protected String checkIdNumber() {
+    protected void checkIdNumber() {
 
         System.out.println("Podaj numer pesel :");
         Scanner scanner = new Scanner(System.in);
         userIdNumber = scanner.next();
 
         if (userIdNumber.matches("[a-zA-Z]+") || userIdNumber.toCharArray().length != 11) { checkIdNumber(); }
-
-        return userIdNumber;
     }
 
-    protected String checkUserAge() {
+    protected void checkUserAge() {
         try {
 
             System.out.println("Podaj wiek :");
@@ -90,6 +84,5 @@ public class UserInformation {
             }
         }
         catch (InputMismatchException in) { checkUserAge(); }
-        return String.valueOf(userAge);
     }
 }

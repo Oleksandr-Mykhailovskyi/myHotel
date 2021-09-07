@@ -98,7 +98,7 @@ public class Reception {
 
         roomChoice(saveRooms, room);
         dayPrice(saveRooms, numberRoom);
-        breakfastPrice(saveRooms, numberRoom);
+        breakfastPrice(saveRooms, numberRoom, days);
         voucher(saveRooms, numberRoom);
 
         checkName();
@@ -128,10 +128,11 @@ public class Reception {
         return rooms;
     }
 
-    protected void getNumber() {
+    protected Integer getNumber() {
 
         userInformation.getNumber();
         userNumber = userInformation.userNumber;
+        return userNumber;
     }
 
     protected String checkName() {
@@ -155,16 +156,18 @@ public class Reception {
         return  userAge;
     }
 
-    protected void checkIdNumber() {
+    protected String checkIdNumber() {
 
         userInformation.checkIdNumber();
         userIdNumber = userInformation.userIdNumber;
+        return userIdNumber;
     }
 
-    protected void roomChoice(List<Room> saveRooms, Room room) {
+    protected Integer roomChoice(List<Room> saveRooms, Room room) {
 
         userInformation.roomChoice(saveRooms, room);
         numberRoom = userInformation.numberRoom;
+        return numberRoom;
     }
 
     protected BigDecimal dayPrice(List<Room> saveRooms, int numberRoom) {
@@ -174,18 +177,22 @@ public class Reception {
     }
 
     protected BigDecimal breakfastPrice(List<Room> saveRooms,
-                                  int numberRoom) {
+                                  int numberRoom,
+                                        String days) {
 
         roomPrice.breakfastPrice(saveRooms,
-                numberRoom);
+                numberRoom,
+                days);
         return saveRooms.get(numberRoom).getPrice();
     }
 
-    protected void voucher(List<Room> saveRooms,
+    protected BigDecimal voucher(List<Room> saveRooms,
                            int numberRoom) {
 
         roomPrice.voucher(saveRooms,
                 numberRoom);
+
+        return saveRooms.get(numberRoom).getPrice();
     }
 
     private void controlOfEarnedMoney(List<Room> saveRooms, int numberRoom) {
@@ -198,7 +205,7 @@ public class Reception {
         cash.showHotelMoney();
     }
 
-    protected void regularCostumer(int numberRoom,
+    protected BigDecimal regularCostumer(int numberRoom,
                                    List<Guest> serializerGuest,
                                    String userIdNumber,
                                    List<Room> saveRooms) {
@@ -207,6 +214,8 @@ public class Reception {
                 serializerGuest,
                 userIdNumber,
                 saveRooms);
+
+        return saveRooms.get(numberRoom).getPrice();
     }
 
     @SneakyThrows
@@ -252,7 +261,7 @@ public class Reception {
     }
 
 
-    protected List<Guest> addNewGuest(String userName,
+    protected Guest addNewGuest(String userName,
                                       String userSurname,
                                       Integer userAge,
                                       String userIdNumber,
@@ -268,10 +277,10 @@ public class Reception {
                         numberRoom + 1,
                         dateOn,
                         dateOff));
-        return serializerGuest;
+        return serializerGuest.get(0);
     }
 
-    protected List<Room> reservedRoom(int numberRoom, List<Room> saveRooms, String days) {
+    protected Room reservedRoom(int numberRoom, List<Room> saveRooms, String days) {
 
         saveRooms.get(numberRoom).setIsFree(false);
         saveRooms.get(numberRoom).setIsReady(false);
@@ -284,7 +293,7 @@ public class Reception {
 
         this.saveRooms = saveRooms;
 
-        return saveRooms;
+        return saveRooms.get(numberRoom);
     }
 
     private void reservedData(String days, int numberRoom, List<Room> saveRooms) {

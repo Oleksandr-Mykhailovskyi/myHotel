@@ -13,7 +13,7 @@ public class RoomPrice {
     protected String coupon;
 
 
-    protected BigDecimal dayPrice(List<Room> saveRooms, int numberRoom) {
+    protected void dayPrice(List<Room> saveRooms, int numberRoom) {
         int price;
 
         System.out.println("Podaj ilość dni : ");
@@ -29,10 +29,9 @@ public class RoomPrice {
         } catch (Exception ex) {
             dayPrice(saveRooms, numberRoom);
         }
-        return saveRooms.get(numberRoom).getPrice();
     }
 
-    protected int breakfastPrice(List<Room> saveRooms, int numberRoom) {
+    protected void breakfastPrice(List<Room> saveRooms, int numberRoom, String days) {
 
         if (saveRooms.get(numberRoom).getBreakfast().equals(false)) {
             System.out.println("""
@@ -48,12 +47,11 @@ public class RoomPrice {
                 saveRooms.get(numberRoom).setBreakfast(true);
             } else if (payForBreakfast.equals("nie") || payForBreakfast.equals("Nie")) {
             } else
-                breakfastPrice(saveRooms, numberRoom);
+                breakfastPrice(saveRooms, numberRoom, days);
         }
-        return breakfastPrice;
     }
 
-    protected Integer voucher(List<Room> saveRooms, int numberRoom) {
+    protected void voucher(List<Room> saveRooms, int numberRoom) {
 
         System.out.println("""
                 Jeśli posiadasz kupon rabatowy to podaj go
@@ -82,10 +80,9 @@ public class RoomPrice {
 
         else
             voucher(saveRooms, numberRoom);
-        return voucherPrice;
     }
 
-    protected int regularCostumer(int numberRoom ,
+    protected void regularCostumer(int numberRoom ,
                                          List<Guest> serializerGuest,
                                          String userIdNumber,
                                          List<Room> saveRooms) {
@@ -104,7 +101,6 @@ public class RoomPrice {
                 break;
             }
         }
-        return regularClientPrice;
     }
 
 
