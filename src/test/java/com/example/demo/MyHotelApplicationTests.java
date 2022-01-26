@@ -25,7 +25,11 @@ class MyHotelApplicationTests {
 		String value = "1";
 		InputStream in = new ByteArrayInputStream(value.getBytes());
 		System.setIn(in);
-		// then
+		// theString value = "1";
+		//		InputStream in = new ByteArrayInputStream(value.getBytes());
+		//		System.setIn(in);
+		//		// then
+		//		assertEquals(1, reception.getNumber());n
 		assertEquals(1, reception.getNumber());
 	}
 
