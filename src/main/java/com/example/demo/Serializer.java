@@ -10,7 +10,7 @@ public class Serializer {
 
     protected List<Room> saveRooms = new ArrayList<>();
 
-    protected void serializationForSave(List<Room> rooms, List<Room> saveRooms) {
+    protected void serializationForSave(List<Room> rooms) {
 
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("roomsForSave.dat"))) {
 
@@ -22,7 +22,7 @@ public class Serializer {
                 saveRooms.add(rooms.get(i));
             }
         }
-        this.saveRooms = saveRooms;
+        this.saveRooms = rooms;
     }
 
     protected void serializationGuest(List<Guest> serializerGuest) {

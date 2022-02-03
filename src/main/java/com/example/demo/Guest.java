@@ -19,14 +19,18 @@ public class Guest implements Serializable {
     protected LocalDate finishRent;
 
     protected Guest(List<Guest> guests) {
-        guests.add(new Guest("Adam", "Baranowski", 32, "81031536647", 2, LocalDate.now(), LocalDate.now().plusDays(2)));
-        guests.add(new Guest("Amelia", "Adams", 25, "95061732268", 4, LocalDate.now(), LocalDate.now().plusDays(1)));
-        guests.add(new Guest("Michał", "Michałowski", 30, "90120180097", 6, LocalDate.now(), LocalDate.now().plusDays(4)));
-        guests.add(new Guest("Norbert", "Wojtowski", 18, "98011577234", 8, LocalDate.now(), LocalDate.now().plusDays(2)));
-        guests.add(new Guest("Damian", "Arnawa", 21, "94071700986", 9, LocalDate.now(), LocalDate.now().plusDays(4)));
-        guests.add(new Guest("Ania", "Kowalska", 28, "92101699087", 10, LocalDate.now(), LocalDate.now().plusDays(3)));
-        guests.add(new Guest("Karina", "Kołos", 23, "95011276105", 12, LocalDate.now(), LocalDate.now().plusDays(1)));
-        guests.add(new Guest("Adrian", "Sokołowski", 28, "92051609754", 15, LocalDate.now(), LocalDate.now().plusDays(4)));
+
+        GuestBuilder guestFactory = new GuestBuilder();
+
+        guests.add(guestFactory.createExampleGuest(2));
+        guests.add(guestFactory.createExampleGuest(4));
+        guests.add(guestFactory.createExampleGuest(6));
+        guests.add(guestFactory.createExampleGuest(8));
+        guests.add(guestFactory.createExampleGuest(9));
+        guests.add(guestFactory.createExampleGuest(10));
+        guests.add(guestFactory.createExampleGuest(12));
+        guests.add(guestFactory.createExampleGuest(15));
+
     }
 
     public String toString() {

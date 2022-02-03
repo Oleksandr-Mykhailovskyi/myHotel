@@ -99,6 +99,7 @@ public class RoomPrice {
                 System.out.println("Otrzymujesz dodatkowy rabat jako stały klient -10% na ten pokój, cena wynosi : " + regularClientPrice);
 
                 break;
+
             }
         }
     }

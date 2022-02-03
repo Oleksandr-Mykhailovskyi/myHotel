@@ -20,8 +20,7 @@ public class Reception {
 
     protected Scanner scanner = new Scanner(System.in);
 
-    protected List<Room> saveRooms = new ArrayList<>();
-    protected List<Room> rooms = new ArrayList<>();
+    public List<Room> room = new ArrayList<>();
 
     protected List<Guest> serializerGuest = new ArrayList<>();
     protected List<Guest> guests = new ArrayList<>();
@@ -35,12 +34,12 @@ public class Reception {
     protected UserInformation userInformation = new UserInformation();
     protected Serializer serializer = new Serializer();
     protected Deserializer deserializer = new Deserializer();
-    protected Room room = new Room(rooms);
 
     protected Reception() {
 
-        deserializerForSave(saveRooms);
-        serializationForSave(rooms, saveRooms);
+        deserializerForSave(room);
+        serializationForSave(room);
+        new Room(room);
         new Guest(guests);
         deserializerGuestForSave(guests, serializerGuest);
 
@@ -67,19 +66,20 @@ public class Reception {
                 run();
                 break;
             case 2:
-                room.showUnRent(saveRooms);
+                ShowRoomsForGuest.showUnRent(room);
                 run();
                 break;
             case 3:
-                showRooms(rooms);
+                showRooms(room);
                 run();
                 break;
             case 4:
                 deserializerGuest(guests);
+                System.out.println(guests);
                 run();
                 break;
             case 5:
-                room.showRent(saveRooms);
+                ShowRoomsForGuest.showRent(room);
                 run();
                 break;
             case 6:
@@ -96,26 +96,26 @@ public class Reception {
 
     private void bookRoom() {
 
-        roomChoice(saveRooms, room);
-        dayPrice(saveRooms, numberRoom);
-        breakfastPrice(saveRooms, numberRoom, days);
-        voucher(saveRooms, numberRoom);
+        roomChoice(room, numberRoom);
+        dayPrice(room, numberRoom);
+        breakfastPrice(room, numberRoom, days);
+        voucher(room, numberRoom);
 
         checkName();
         checkSurname();
         checkUserAge();
         checkIdNumber();
 
-        regularCostumer(numberRoom, serializerGuest, userIdNumber, rooms);
-        reservedData(days, numberRoom, saveRooms);
+        regularCostumer(numberRoom, serializerGuest, userIdNumber, room);
+        reservedData(days, numberRoom, room);
         addNewGuest(userName, userSurname, userAge, userIdNumber, numberRoom, dateOn, dateOff);
         serializationGuest(serializerGuest);
-        controlOfEarnedMoney(saveRooms, numberRoom);
+        controlOfEarnedMoney(room, numberRoom);
 
-        sendEmailInfo(serializerGuest, rooms, numberRoom, dateOn, dateOff);
+        sendEmailInfo(serializerGuest, room, numberRoom, dateOn, dateOff);
 
-        reservedRoom(numberRoom, saveRooms, days);
-        serializationForSave(rooms, saveRooms);
+        reservedRoom(numberRoom, room, days);
+        serializationForSave(room);
     }
 
     protected List<Room> showRooms(List<Room> rooms) {
@@ -163,41 +163,41 @@ public class Reception {
         return userIdNumber;
     }
 
-    protected Integer roomChoice(List<Room> saveRooms, Room room) {
+    protected Integer roomChoice(List<Room> room, int numberRoom) {
 
-        userInformation.roomChoice(saveRooms, room);
+        userInformation.roomChoice(room, numberRoom);
         numberRoom = userInformation.numberRoom;
         return numberRoom;
     }
 
-    protected BigDecimal dayPrice(List<Room> saveRooms, int numberRoom) {
-        roomPrice.dayPrice(saveRooms, numberRoom);
+    protected BigDecimal dayPrice(List<Room> room, int numberRoom) {
+        roomPrice.dayPrice(room, numberRoom);
         days = roomPrice.days;
-        return saveRooms.get(numberRoom).getPrice();
+        return room.get(numberRoom).getPrice();
     }
 
-    protected BigDecimal breakfastPrice(List<Room> saveRooms,
+    protected BigDecimal breakfastPrice(List<Room> room,
                                   int numberRoom,
                                         String days) {
 
-        roomPrice.breakfastPrice(saveRooms,
+        roomPrice.breakfastPrice(room,
                 numberRoom,
                 days);
-        return saveRooms.get(numberRoom).getPrice();
+        return room.get(numberRoom).getPrice();
     }
 
-    protected BigDecimal voucher(List<Room> saveRooms,
+    protected BigDecimal voucher(List<Room> room,
                            int numberRoom) {
 
-        roomPrice.voucher(saveRooms,
+        roomPrice.voucher(room,
                 numberRoom);
 
-        return saveRooms.get(numberRoom).getPrice();
+        return room.get(numberRoom).getPrice();
     }
 
-    private void controlOfEarnedMoney(List<Room> saveRooms, int numberRoom) {
+    private void controlOfEarnedMoney(List<Room> room, int numberRoom) {
 
-        cash.controlOfEarnedMoney(saveRooms, numberRoom);
+        cash.controlOfEarnedMoney(room, numberRoom);
     }
 
     private void showHotelMoney() {
@@ -208,40 +208,40 @@ public class Reception {
     protected BigDecimal regularCostumer(int numberRoom,
                                    List<Guest> serializerGuest,
                                    String userIdNumber,
-                                   List<Room> saveRooms) {
+                                   List<Room> room) {
 
         roomPrice.regularCostumer(numberRoom,
                 serializerGuest,
                 userIdNumber,
-                saveRooms);
+                room);
 
-        return saveRooms.get(numberRoom).getPrice();
+        return room.get(numberRoom).getPrice();
     }
 
     @SneakyThrows
     protected void sendEmailInfo(List<Guest> serializerGuest,
-                                 List<Room> rooms,
+                                 List<Room> room,
                                  int numberRoom,
                                  LocalDate dateOn,
                                  LocalDate dateOff) {
 
         sendMail.sendEmailInfo(serializerGuest,
-                rooms,
+                room,
                 numberRoom,
                 dateOn,
                 dateOff);
     }
 
-    private void serializationForSave(List<Room> rooms, List<Room> saveRooms) {
+    private void serializationForSave(List<Room> room) {
 
-        serializer.serializationForSave(rooms, saveRooms);
-        this.saveRooms = serializer.saveRooms;
+        serializer.serializationForSave(room);
+        this.room = serializer.saveRooms;
     }
 
-    protected void deserializerForSave(List<Room> saveRooms) {
+    protected void deserializerForSave(List<Room> room) {
 
-        deserializer.deserializerForSave(saveRooms);
-        this.saveRooms = deserializer.saveRooms;
+        deserializer.deserializerForSave(room);
+        this.room = deserializer.saveRooms;
     }
 
     private void serializationGuest(List<Guest> serializerGuest) {
@@ -277,23 +277,24 @@ public class Reception {
                         numberRoom + 1,
                         dateOn,
                         dateOff));
+
         return serializerGuest.get(0);
     }
 
-    protected Room reservedRoom(int numberRoom, List<Room> saveRooms, String days) {
+    protected Room reservedRoom(int numberRoom, List<Room> room, String days) {
 
-        saveRooms.get(numberRoom).setIsFree(false);
-        saveRooms.get(numberRoom).setIsReady(false);
+        room.get(numberRoom).setIsFree(false);
+        room.get(numberRoom).setIsReady(false);
 
         System.out.println(
-                "Dziękuję! Cena za pokój : " + saveRooms.get(numberRoom).getPrice() +
-                " | Sniadanie dostępne : " + saveRooms.get(numberRoom).getBreakfast() +
+                "Dziękuję! Cena za pokój : " + room.get(numberRoom).getPrice() +
+                " | Sniadanie dostępne : " + room.get(numberRoom).getBreakfast() +
                 " | Ilość dni : " + days
         );
 
-        this.saveRooms = saveRooms;
+        this.room = room;
 
-        return saveRooms.get(numberRoom);
+        return room.get(numberRoom);
     }
 
     private void reservedData(String days, int numberRoom, List<Room> saveRooms) {

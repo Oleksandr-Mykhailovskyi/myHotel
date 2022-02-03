@@ -24,18 +24,18 @@ public class UserInformation {
         }
     }
 
-    protected void roomChoice(List<Room> saveRooms, Room room) {
+    protected void roomChoice(List<Room> room, int numberRoom) {
         try {
-            room.showUnRent(saveRooms);
+            ShowRoomsForGuest.showUnRent(room);
             System.out.println("Wybierz pokój :");
             Scanner number = new Scanner(System.in);
             numberRoom = number.nextInt() - 1;
 
-            if (numberRoom >= 0 && numberRoom <= 19 && saveRooms.get(numberRoom).getIsFree().equals(true) && saveRooms.get(numberRoom).getIsReady().equals(true)) {
+            if (numberRoom >= 0 && numberRoom <= 19 && room.get(numberRoom).getIsFree().equals(true) && room.get(numberRoom).getIsReady().equals(true)) {
             } else
-                roomChoice(saveRooms, room);
+                roomChoice(room, numberRoom);
         } catch (InputMismatchException in) {
-            roomChoice(saveRooms, room);
+            roomChoice(room, numberRoom);
         }
     }
 
