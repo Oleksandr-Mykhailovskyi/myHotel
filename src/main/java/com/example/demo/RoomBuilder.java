@@ -4,16 +4,16 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class RoomBuilder {
-    private BigDecimal price = BigDecimal.valueOf(0);
-    private LocalDate reservedFrom = null;
-    private LocalDate reservedUntil = null;
-    private int roomNumber = 0;
-    private int howManyRooms = 0;
-    private Boolean breakfast = false;
-    private Boolean isFree = false;
-    private Boolean isReady = false;
+    private BigDecimal price;
+    private LocalDate reservedFrom;
+    private LocalDate reservedUntil;
+    private int roomNumber;
+    private int howManyRooms;
+    private Boolean breakfast;
+    private Boolean isFree;
+    private Boolean isReady;
 
-    private RoomBuilder() {
+    public RoomBuilder() {
     }
 
     public static RoomBuilder aRoom() {

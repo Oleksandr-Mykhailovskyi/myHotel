@@ -11,7 +11,6 @@ import java.util.List;
 import static com.example.demo.RoomBuilder.aRoom;
 
 
-
         @AllArgsConstructor
         @Data
         public class Room implements Serializable {
@@ -24,8 +23,6 @@ import static com.example.demo.RoomBuilder.aRoom;
                 private Boolean breakfast;
                 private Boolean isFree;
                 private Boolean isReady;
-
-
 
 
                 protected Room(List<Room> room) {
