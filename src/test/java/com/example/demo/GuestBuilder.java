@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.guest.Guest;
+
 import java.time.LocalDate;
 
 public class GuestBuilder {

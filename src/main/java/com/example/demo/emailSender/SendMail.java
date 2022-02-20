@@ -1,6 +1,8 @@
-package com.example.demo;
+package com.example.demo.emailSender;
 
 
+import com.example.demo.guest.Guest;
+import com.example.demo.rooms.Room;
 import lombok.SneakyThrows;
 
 import javax.mail.*;
@@ -15,7 +17,7 @@ import java.util.regex.Pattern;
 public class SendMail {
 
     @SneakyThrows
-    protected void sendEmailInfo(List<Guest> serializerGuest,
+    public void sendEmailInfo(List<Guest> serializerGuest,
                                  List<Room> rooms,
                                  int numberRoom,
                                  LocalDate dateOn,
@@ -46,7 +48,7 @@ public class SendMail {
                     dateOff);
     }
 
-    protected boolean isValid(String email,
+    public boolean isValid(String email,
                               List<Guest> serializerGuest,
                               List<Room> rooms,
                               int numberRoom,
@@ -89,7 +91,7 @@ public class SendMail {
         Session session = Session.getInstance(properties, new Authenticator() {
 
             @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
+            public PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(myAccountEmail, password);
             }
         });

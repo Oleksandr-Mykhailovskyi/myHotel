@@ -1,11 +1,13 @@
-package com.example.demo;
+package com.example.demo.hotelMoney;
+
+import com.example.demo.rooms.Room;
 
 import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
-public class Cash {
-    protected void controlOfEarnedMoney(List<Room> saveRooms, int numberRoom) {
+public class HotelCash {
+    public void controlOfEarnedMoney(List<Room> saveRooms, int numberRoom) {
 
         File myFile2 = new File("Budżet.txt");
 
@@ -31,32 +33,5 @@ public class Cash {
             myWriter.close();
         }
         catch (IOException e) { e.getMessage(); e.printStackTrace(); }
-    }
-
-    protected void showHotelMoney() {
-
-        Scanner myReader;
-
-        System.out.println("Podaj hasło: ");
-        Scanner login = new Scanner(System.in);
-        String password = login.next();
-
-        if (password.equals("admin1234")) {
-            try {
-
-                FileReader file = new FileReader("Budżet.txt");
-                myReader = new Scanner(file);
-
-                while (myReader.hasNext()) {
-
-                    System.out.println(myReader.next());
-                }
-                myReader.close();
-            }
-            catch (FileNotFoundException e) { e.printStackTrace(); }
-        }
-        else {
-            System.out.println("Żle podałeś hasło");
-        }
     }
 }

@@ -1,4 +1,7 @@
-package com.example.demo;
+package com.example.demo.user;
+
+import com.example.demo.recepcja.strategy.ShowUnRentRoomsForGuestStrategy;
+import com.example.demo.rooms.Room;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -6,14 +9,14 @@ import java.util.Scanner;
 
 public class UserInformation {
 
-    protected String userName;
-    protected String userSurname;
-    protected String userIdNumber;
-    protected int numberRoom;
-    protected int userAge;
-    protected int userNumber;
+    public String userName;
+    public String userSurname;
+    public String userIdNumber;
+    public int numberRoom;
+    public int userAge;
+    public int userNumber;
 
-    protected void getNumber() {
+    public void getNumber() {
 
         try {
             Scanner scanner = new Scanner(System.in);
@@ -24,9 +27,9 @@ public class UserInformation {
         }
     }
 
-    protected void roomChoice(List<Room> room, int numberRoom) {
+    public void roomChoice(List<Room> room, int numberRoom) {
         try {
-            ShowRoomsForGuest.showUnRent(room);
+            new ShowUnRentRoomsForGuestStrategy(room);
             System.out.println("Wybierz pokój :");
             Scanner number = new Scanner(System.in);
             numberRoom = number.nextInt() - 1;
@@ -39,7 +42,7 @@ public class UserInformation {
         }
     }
 
-    protected void checkName() {
+    public void checkName() {
 
         System.out.println("Podaj imie :");
         Scanner name = new Scanner(System.in);
@@ -49,7 +52,7 @@ public class UserInformation {
             checkName();
     }
 
-    protected void checkSurname() {
+    public void checkSurname() {
 
         System.out.println("Podaj nazwisko :");
         Scanner surname = new Scanner(System.in);
@@ -59,7 +62,7 @@ public class UserInformation {
             checkSurname();
     }
 
-    protected void checkIdNumber() {
+    public void checkIdNumber() {
 
         System.out.println("Podaj numer pesel :");
         Scanner scanner = new Scanner(System.in);
@@ -68,7 +71,7 @@ public class UserInformation {
         if (userIdNumber.matches("[a-zA-Z]+") || userIdNumber.toCharArray().length != 11) { checkIdNumber(); }
     }
 
-    protected void checkUserAge() {
+    public void checkUserAge() {
         try {
 
             System.out.println("Podaj wiek :");

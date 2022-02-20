@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.rooms;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.example.demo.RoomBuilder.aRoom;
+import static com.example.demo.rooms.RoomBuilder.aRoom;
 
 
         @AllArgsConstructor
@@ -25,7 +25,7 @@ import static com.example.demo.RoomBuilder.aRoom;
                 private Boolean isReady;
 
 
-                protected Room(List<Room> room) {
+                public Room(List<Room> room) {
 
                         room.add(aRoom().withPrice(BigDecimal.valueOf(850))
                                 .withRoomNumber(1)

@@ -1,19 +1,22 @@
-package com.example.demo;
+package com.example.demo.roomPrice;
+
+import com.example.demo.guest.Guest;
+import com.example.demo.rooms.Room;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
 public class RoomPrice {
-    protected String days;
+    public String days;
     int breakfastPrice;
     int voucherPrice;
     int regularClientPrice;
-    protected String payForBreakfast;
-    protected String coupon;
+    public String payForBreakfast;
+    public String coupon;
 
 
-    protected void dayPrice(List<Room> saveRooms, int numberRoom) {
+    public void dayPrice(List<Room> saveRooms, int numberRoom) {
         int price;
 
         System.out.println("Podaj ilość dni : ");
@@ -31,7 +34,7 @@ public class RoomPrice {
         }
     }
 
-    protected void breakfastPrice(List<Room> saveRooms, int numberRoom, String days) {
+    public void breakfastPrice(List<Room> saveRooms, int numberRoom, String days) {
 
         if (saveRooms.get(numberRoom).getBreakfast().equals(false)) {
             System.out.println("""
@@ -51,7 +54,7 @@ public class RoomPrice {
         }
     }
 
-    protected void voucher(List<Room> saveRooms, int numberRoom) {
+    public void voucher(List<Room> saveRooms, int numberRoom) {
 
         System.out.println("""
                 Jeśli posiadasz kupon rabatowy to podaj go
@@ -82,7 +85,7 @@ public class RoomPrice {
             voucher(saveRooms, numberRoom);
     }
 
-    protected void regularCostumer(int numberRoom ,
+    public void regularCostumer(int numberRoom ,
                                          List<Guest> serializerGuest,
                                          String userIdNumber,
                                          List<Room> saveRooms) {

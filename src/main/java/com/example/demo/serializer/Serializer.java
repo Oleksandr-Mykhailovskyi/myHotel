@@ -1,4 +1,7 @@
-package com.example.demo;
+package com.example.demo.serializer;
+
+import com.example.demo.guest.Guest;
+import com.example.demo.rooms.Room;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -8,9 +11,9 @@ import java.util.List;
 
 public class Serializer {
 
-    protected List<Room> saveRooms = new ArrayList<>();
+    public List<Room> saveRooms = new ArrayList<>();
 
-    protected void serializationForSave(List<Room> rooms) {
+    public void serializationForSave(List<Room> rooms) {
 
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("roomsForSave.dat"))) {
 
@@ -25,7 +28,7 @@ public class Serializer {
         this.saveRooms = rooms;
     }
 
-    protected void serializationGuest(List<Guest> serializerGuest) {
+    public void serializationGuest(List<Guest> serializerGuest) {
 
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("guests.dat"))) {
 
