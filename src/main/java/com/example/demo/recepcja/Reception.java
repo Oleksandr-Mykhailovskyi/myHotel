@@ -9,14 +9,16 @@ import com.example.demo.roomPrice.RoomPrice;
 import com.example.demo.rooms.Room;
 import com.example.demo.serializer.Serializer;
 import com.example.demo.user.UserInformation;
+import com.example.demo.userRepository.UserRepository;
 import lombok.SneakyThrows;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Reception {
+
+    UserRepository userRepository;
 
     public String userName;
     public String userSurname;
