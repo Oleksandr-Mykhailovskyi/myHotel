@@ -26,8 +26,6 @@ public class Reception {
     public int userAge;
     public int numberRoom;
 
-    public Scanner scanner = new Scanner(System.in);
-
     public List<Room> room = new ArrayList<>();
 
     public List<Guest> serializerGuest = new ArrayList<>();
@@ -43,14 +41,30 @@ public class Reception {
     public Serializer serializer = new Serializer();
     public Deserializer deserializer = new Deserializer();
 
-//    private List<ReceptionStrategy> r = List.of(
-//            new BookRoomStrategy(userName, userSurname, userIdNumber, days, userNumber, userAge, numberRoom, room, serializerGuest, dateOn, dateOff, roomPrice, cash, sendMail, userInformation, serializer, deserializer).receptionAction(),
-//            new ShowUnRentRoomsForGuestStrategy(room).receptionAction(),
-//            new ShowRoomsStrategy(room).receptionAction(),
-//            new ShowGuestsStrategy(serializerGuest).receptionAction(),
-//            new ShowRentRoomsForGuestStrategy(room).receptionAction(),
-//            new ShowHotelMoneyStrategy().receptionAction()
-//    );
+    private List<ReceptionStrategy> receptionStrategyList = List.of(
+            new BookRoomStrategy(userName,
+            userSurname,
+            userIdNumber,
+            days,
+            userNumber,
+            userAge,
+            numberRoom,
+            room,
+            serializerGuest,
+            dateOn,
+            dateOff,
+            roomPrice,
+            cash,
+            sendMail,
+            userInformation,
+            serializer,
+            deserializer),
+            new ShowUnRentRoomsForGuestStrategy(room),
+            new ShowRoomsStrategy(room),
+            new ShowGuestsStrategy(serializerGuest),
+            new ShowRentRoomsForGuestStrategy(room),
+            new ShowHotelMoneyStrategy()
+    );
 
     public Reception() {
 
@@ -77,53 +91,8 @@ public class Reception {
 
         getNumber();
 
-        switch (userNumber) {
-            case 1:
-                new BookRoomStrategy(userName,
-                        userSurname,
-                        userIdNumber,
-                        days,
-                        userNumber,
-                        userAge,
-                        numberRoom,
-                        room,
-                        serializerGuest,
-                        dateOn,
-                        dateOff,
-                        roomPrice,
-                        cash,
-                        sendMail,
-                        userInformation,
-                        serializer,
-                        deserializer).receptionAction();
-                run();
-                break;
-            case 2:
-                new ShowUnRentRoomsForGuestStrategy(room).receptionAction();
-                run();
-                break;
-            case 3:
-                new ShowRoomsStrategy(room).receptionAction();
-                run();
-                break;
-            case 4:
-                new ShowGuestsStrategy(serializerGuest).receptionAction();
-                run();
-                break;
-            case 5:
-                new ShowRentRoomsForGuestStrategy(room).receptionAction();
-                run();
-                break;
-            case 6:
-                new ShowHotelMoneyStrategy().showHotelMoney();
-                run();
-                break;
-            case 7:
-                scanner.close();
-                System.exit(0);
-            default:
-                run();
-        }
+        receptionStrategyList.get(numberRoom -1).receptionAction();
+        run();
     }
 
     public Integer getNumber() {
